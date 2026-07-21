@@ -1,10 +1,10 @@
 # DotAgeCoop
 
-> ## ⚠️ Work in progress
+> ## ⚠️ **Use at your own risk!**
 >
-> <strong>This mod is not finished.</strong> Co-op may have <strong>bugs</strong>, <strong>desyncs</strong>, crashes, and incomplete features. Feedback and bug reports are welcome.
+> **This mod is not finished.** Co-op may have **bugs**, **desyncs**, crashes, and incomplete features. Feedback and bug reports are welcome.
 >
-> <span style="color:#c62828"><strong>Use at your own risk; saves and sessions can break.</strong> Memories and other profile data can also be affected. Prefer a non-main game profile for the mod (e.g. <strong>B</strong> or <strong>C</strong>) — you can switch profiles in-game.</span>
+> ++Saves and in-game profile can break.++ Memories and other profile data can also be affected. ++Prefer a non-main game profile for the mod++ (e.g. **B** or **C**) — you can switch profiles in-game.
 
 **Shared-settlement online co-op for [dotAGE](https://store.steampowered.com/app/638510/dotAGE/).**
 
@@ -59,6 +59,8 @@ If MelonLoader is not installed yet:
 2. Extract into the DotAGE folder so `version.dll` and `MelonLoader\` sit next to `dotAge.exe`
 3. Create a `Mods\` folder if it is missing
 4. Launch the game once so MelonLoader can generate its folders
+
+
 
 ### 2. The mod
 
