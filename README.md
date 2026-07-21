@@ -1,14 +1,18 @@
-# DotAgeCoop
-
-> ## ⚠️ **Use at your own risk!**
->
-> **This mod is not finished.** Co-op may have **bugs**, **desyncs**, crashes, and incomplete features. Feedback and bug reports are welcome.
->
-> ++Saves and in-game profile can break.++ Memories and other profile data can also be affected. ++Prefer a non-main game profile for the mod++ (e.g. **B** or **C**) — you can switch profiles in-game.
+# DotAge-coop
 
 **Shared-settlement online co-op for [dotAGE](https://store.steampowered.com/app/638510/dotAGE/).**
 
-Play the same village together: build, order pips, research, and survive the ages on one host-authoritative world. Lobby flow is simple — create a lobby, copy a code, friend joins.
+Build, research, assign pips, survive disasters, and progress through the ages together in a single shared settlement.
+
+> ## ⚠️ **Early Development!**
+>
+> DotAge-coop is still experimental.
+>
+> Bugs, desyncs, crashes, incomplete features, and save incompatibilities may occur.
+>
+> Save files, memories and profile progression can be affected.
+
+**It is strongly recommended to use a secondary profile (B or C) instead of your main profile!**
 
 ---
 
@@ -27,17 +31,21 @@ Play the same village together: build, order pips, research, and survive the age
 | **QoL**         | Live cursors, in-game chat, New Game / Load Game with save transfer |
 
 
-**Model:** the host owns the simulation (RNG, events, commits). Clients send intents and apply snapshots — one shared village, not two parallel runs.
+**Model:** the host owns the simulation (RNG, events, commits).
 
 ---
 
+
+
 ## Requirements
 
-- A working **dotAGE** install (Unity 2022.3 Mono)
-- **[Steam](https://store.steampowered.com/)** running (GOG build is fine for networking)
-- **[MelonLoader](https://github.com/LavaGang/MelonLoader) 0.7.x**
+- A working **dotAGE** installation (tested on 1.10.4 GOG version)
+- **[Steam](https://store.steampowered.com/)** running (even if it's the GOG version)
+- **[MelonLoader](https://github.com/LavaGang/MelonLoader) 0.7.x** (tested on v0.7.3)
 
-Default Steam AppID is **480 (Spacewar)** so players without a Steam copy of DotAGE can still use Steam networking. **Both players must use the same AppID.**
+Default Steam AppID is **480 (Spacewar)** so players with a GOG copy of DotAGE can still use Steam networking. 
+
+**Both players must use the same AppID!**
 
 To use the real DotAGE Steam app instead, write `638510` into:
 
@@ -49,39 +57,47 @@ To use the real DotAGE Steam app instead, write `638510` into:
 
 ---
 
+
+
 ## Install
 
-### 1. MelonLoader
+
+
+### 1. Configure Steam AppID
+
+> ⚠️ Both players must use the same AppID or they will not be able to see each other's lobbies.
+
+Edit or create:
+
+```text
+<game>/UserData/DotAgeCoop/steam_appid.txt
+```
+
+**Steam version of dotAGE:**
+
+- set text of `steam_appid.txt` to `638510`
+
+**GOG version of dotAGE: (default)**
+
+- set text of `steam_appid.txt` to `480`
+
+
+
+### 2. MelonLoader
 
 If MelonLoader is not installed yet:
 
-1. Download [MelonLoader.x64.zip](https://github.com/LavaGang/MelonLoader/releases)
-2. Extract into the DotAGE folder so `version.dll` and `MelonLoader\` sit next to `dotAge.exe`
-3. Create a `Mods\` folder if it is missing
-4. Launch the game once so MelonLoader can generate its folders
+1. Download [MelonLoader](https://github.com/LavaGang/MelonLoader/releases)
+2. Extract into the DotAGE folder so `version.dll` and `MelonLoader\` sit next to `dotAge.exe` (or check [Installation](https://github.com/LavaGang/MelonLoader#install))
+3. Launch the game once so MelonLoader can generate its folders
 
 
 
-### 2. The mod
+### 3. The mod
 
-Either:
+- Download [realease build](https://github.com/widugastir/dotAGE-coop/releases) and place `DotAgeCoop.dll` into `<game>/Mods/` (create if not exists)
 
-- **Release build:** place `DotAgeCoop.dll` into `<game>/Mods/`, or
-- **From source:**
 
-```powershell
-dotnet build src\DotAgeCoop.Mod\DotAgeCoop.Mod.csproj -c Release
-```
-
-On success the DLL is copied to your configured DotAGE `Mods` folder.
-
-Override the game path:
-
-```powershell
-dotnet build -c Release -p:DotAgeDir="D:\Games\dotAGE"
-```
-
----
 
 ## How to play
 
@@ -90,53 +106,17 @@ dotnet build -c Release -p:DotAgeDir="D:\Games\dotAGE"
 3. **Host:** Create Lobby → **Copy Code** → send the number to your friend.
 4. **Client:** paste the code → **Join**.
 5. Host starts a **New Game** or **Load Game**. Clients should already be in the lobby.
-6. Play the shared settlement. **Pass Turn** is gated so everyone is ready before the night/morning continues (clients can request Pass Turn; the host still drives the turn).
+6. Play the shared settlement. **Pass Turn** is gated so everyone is ready before the night/morning continues.
 
-**Local two-copy testing** (same PC): use Host Local / Join Local in the F8 overlay, or the scripts under `tools/`:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools\coop-test-newgame.ps1 -KillExisting
-powershell -ExecutionPolicy Bypass -File tools\coop-test-loadgame.ps1 -KillExisting
-```
+**Local two-copy testing** (same PC): use Host Local / Join Local in the F8 overlay.
 
 ---
 
-## Status
 
-Working well enough for co-op runs:
-
-- Host-authoritative village sync (buildings, pips, research, events, food)
-- Turn / morning / dialogue ready gates
-- Synced New Game and Load Game (with peer load-wait)
-- Steam code lobbies + local lobby for development
-
-Still early / incomplete:
-
-- Some protocol scaffolding unused in sync
-- Lobby UI is in-game IMGUI (F8), not a separate proxy window
-- Desync recovery and edge-case polish ongoing
-
-Contributor notes (architecture, invariants, known bugs): see `[Docs/](Docs/)`.
-
----
-
-## Architecture (short)
-
-
-| Piece                                     | Role                                             |
-| ----------------------------------------- | ------------------------------------------------ |
-| `SteamLobbyService` / `LocalLobbyService` | Lobby create/join + transport                    |
-| `CoopSession`                             | Message routing, chat, host/client roles         |
-| `*SyncService`                            | Turn, events, pips, research, load, bootstrap, … |
-| Harmony hooks                             | Gate vanilla input / inject synced commits       |
-| `LobbyOverlay`                            | F8 IMGUI lobby UI                                |
-
-
----
 
 ## License & credits
 
-- **Mod code:** free to use and fork for the DotAgeCoop project.
-- **dotAGE** is © [CKC Games](https://ckcgames.com/) / Michele Pirovano — this project is an unofficial fan mod and is not affiliated with the publisher.
+- **Mod code:** free to use and fork.
+- **dotAGE** is © CKC Games / Michele Pirovano.
+- This project is an unofficial fan mod and is not affiliated with the publisher.
 
-Enjoy the village together.
