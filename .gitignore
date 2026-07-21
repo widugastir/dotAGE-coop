@@ -1,0 +1,13 @@
+# Ignore everything at repo root except the mod and tools
+/*
+!/.gitignore
+!/README.md
+!/DotAgeCoop.sln
+!/src/
+!/tools/
+
+# Build / IDE artifacts (also under src/)
+**/bin/
+**/obj/
+*.user
+.vs/
