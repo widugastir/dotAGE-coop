@@ -43,20 +43,6 @@ Build, research, assign pips, survive disasters, and progress through the ages t
 - **[Steam](https://store.steampowered.com/)** running (even if it's the GOG version)
 - **[MelonLoader](https://github.com/LavaGang/MelonLoader) 0.7.x** (tested on v0.7.3)
 
-Default Steam AppID is **480 (Spacewar)** so players with a GOG copy of DotAGE can still use Steam networking. 
-
-**Both players must use the same AppID!**
-
-To use the real DotAGE Steam app instead, write `638510` into:
-
-```text
-<game>/UserData/DotAgeCoop/steam_appid.txt
-```
-
-(and into `<game>/steam_appid.txt` if that file exists).
-
----
-
 
 
 ## Install
