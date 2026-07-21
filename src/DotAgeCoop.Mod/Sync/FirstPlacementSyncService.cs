@@ -96,7 +96,7 @@ namespace DotAgeCoop.Sync
             style.fontSize = 18;
             style.fontStyle = FontStyle.Bold;
             style.normal.textColor = new Color(1f, 0.92f, 0.75f, 1f);
-            GUI.Label(r, "Готовы: хост выбирает стартовую позицию…", style);
+            GUI.Label(r, "Ready: host is choosing the starting position…", style);
             GUI.color = prev;
         }
     }

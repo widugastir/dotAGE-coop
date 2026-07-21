@@ -619,7 +619,7 @@ namespace DotAgeCoop.Sync
             if (data.IsLoadGame)
             {
                 _log.Msg("[Bootstrap] Load-game join — load pre-received host save");
-                _status = "Загрузка сохранения…";
+                _status = "Loading save…";
                 yield return null;
 
                 try { PrepareClientUiForGameplay(); }
@@ -1489,11 +1489,11 @@ namespace DotAgeCoop.Sync
             else if (_waitingForLoad && !_loadUnlocked)
             {
 
-                text = "Готовы: старт коопа " + _loadReadyCount + "/" + _loadNeededCount;
+                text = "Ready: coop start " + _loadReadyCount + "/" + _loadNeededCount;
             }
             else
             {
-                text = "Готовы: загрузка… (" + _loadReadyCount + "/" + _loadNeededCount + ")";
+                text = "Ready: loading… (" + _loadReadyCount + "/" + _loadNeededCount + ")";
             }
 
             GUIStyle style = new GUIStyle(GUI.skin.label);

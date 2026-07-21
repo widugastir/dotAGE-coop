@@ -1592,11 +1592,11 @@ namespace DotAgeCoop.Sync
             {
                 string text;
                 if (endTurnReadyBanner)
-                    text = "Готовы: " + ReadyCount + "/" + NeededCount;
+                    text = "Ready: " + ReadyCount + "/" + NeededCount;
                 else if (phase == TurnPhase.MorningLocal)
-                    text = "Утро…";
+                    text = "Morning…";
                 else
-                    text = "Утро: " + ReadyCount + "/" + NeededCount;
+                    text = "Morning: " + ReadyCount + "/" + NeededCount;
                 style.alignment = TextAnchor.MiddleRight;
                 style.fontSize = 16;
                 float pad = 12f;
@@ -1628,9 +1628,9 @@ namespace DotAgeCoop.Sync
             GUI.color = Color.white;
 
             string blockingText = phase == TurnPhase.RosterSync
-                ? "Готовы: работники… (" + ReadyCount + "/" + NeededCount + ")"
-                : "Утро: готовы " + ReadyCount + "/" + NeededCount +
-                  (_localMorningDone ? " — не все готовы" : " — дождитесь конца утра");
+                ? "Ready: workers… (" + ReadyCount + "/" + NeededCount + ")"
+                : "Morning: ready " + ReadyCount + "/" + NeededCount +
+                  (_localMorningDone ? " — not everyone is ready" : " — wait for morning to finish");
 
             style.alignment = TextAnchor.MiddleCenter;
             style.fontSize = 18;

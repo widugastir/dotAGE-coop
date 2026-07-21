@@ -625,7 +625,7 @@ namespace DotAgeCoop.Sync
             GUI.DrawTexture(r, Texture2D.whiteTexture);
             GUI.color = Color.white;
 
-            string text = "Диалог: готовы… (" + _readyCount + "/" + _neededCount + ")";
+            string text = "Dialogue: ready… (" + _readyCount + "/" + _neededCount + ")";
             GUIStyle style = new GUIStyle(GUI.skin.label);
             style.alignment = TextAnchor.MiddleCenter;
             style.fontSize = 18;

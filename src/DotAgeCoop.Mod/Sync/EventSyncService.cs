@@ -145,7 +145,7 @@ namespace DotAgeCoop.Sync
             Rect titleRect = new Rect(r.x + 16f, r.y + 12f, r.width - 32f, 72f);
             Rect subRect = new Rect(r.x + 16f, r.y + 84f, r.width - 32f, 44f);
             GUI.Label(titleRect, _waitOverlay, title);
-            GUI.Label(subRect, "Игра не зависла — ждём синхронизацию с напарником.", sub);
+            GUI.Label(subRect, "Game is not frozen — waiting to sync with your partner.", sub);
             GUI.color = prev;
         }
 
@@ -509,12 +509,12 @@ namespace DotAgeCoop.Sync
                     _eventStageSoloDialogue = false;
                 }
 
-                _waitOverlay = "Клиент смотрит событие…";
+                _waitOverlay = "Client is viewing the event…";
             }
             else
             {
                 _clientWaitingStageTape = true;
-                _waitOverlay = "Хост разыгрывает событие…";
+                _waitOverlay = "Host is resolving the event…";
                 yield return WaitStageTapeCO(120f);
                 _clientWaitingStageTape = false;
                 _waitOverlay = string.Empty;
@@ -818,7 +818,7 @@ namespace DotAgeCoop.Sync
             if (_session.IsHost || !_session.HasCoopPartner)
                 yield break;
 
-            _waitOverlay = "Хост разыгрывает событие…";
+            _waitOverlay = "Host is resolving the event…";
             float deadline = Time.unscaledTime + timeoutSec;
             while (!_hasArrivalCommit && Time.unscaledTime < deadline && !_unstick)
                 yield return null;

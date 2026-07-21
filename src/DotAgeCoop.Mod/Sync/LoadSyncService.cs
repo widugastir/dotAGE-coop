@@ -66,23 +66,23 @@ namespace DotAgeCoop.Sync
             get
             {
                 if (_hostPreTransferActive)
-                    return "Отправка сохранения " + _hostSendReady + "/" + _hostSendNeeded;
+                    return "Sending save " + _hostSendReady + "/" + _hostSendNeeded;
 
                 if (_transferFailed)
-                    return "Получение сохранения: ошибка";
+                    return "Receiving save: error";
 
                 if (_clientReceiving)
                 {
                     if (_transferComplete)
-                        return "Получение сохранения: 100/100%";
-                    return "Получение сохранения: " + ProgressPercent + "/100%";
+                        return "Receiving save: 100/100%";
+                    return "Receiving save: " + ProgressPercent + "/100%";
                 }
 
                 if (_clientWaitingForHost)
-                    return "Готовы: хост готовит сохранение…";
+                    return "Ready: host is preparing the save…";
 
                 if (_clientLoadingGame)
-                    return "Загрузка сохранения…";
+                    return "Loading save…";
 
                 return "…";
             }
