@@ -12,7 +12,7 @@ namespace DotAgeCoop
 
         private static bool _loaded;
         private static bool _enabled;
-        private static string _profile = "A";
+        private static string _profile = "NONE";
         private static int _slot;
 
         public static bool Enabled
@@ -89,7 +89,7 @@ namespace DotAgeCoop
         private static void LoadOrCreate()
         {
             _enabled = false;
-            _profile = "A";
+            _profile = "NONE";
             _slot = 0;
 
             string path = ConfigPath;
@@ -109,8 +109,8 @@ namespace DotAgeCoop
                 try
                 {
                     File.WriteAllText(path,
-                        "# DotAgeCoop — per-install save profile (A, B, C, or NONE)." + Environment.NewLine +
-                        "# NONE = vanilla profile switching (shared LocalLow selection)." + Environment.NewLine +
+                        "# DotAgeCoop — per-install save profile (A, B, C, or OFF/NONE)." + Environment.NewLine +
+                        "# OFF/NONE = vanilla profile switching (shared LocalLow selection)." + Environment.NewLine +
                         "# Use A vs B on each game copy when testing coop on one PC." + Environment.NewLine +
                         "profile=" + suggested + Environment.NewLine);
                 }
@@ -182,22 +182,7 @@ namespace DotAgeCoop
 
         private static string SuggestDefaultProfile()
         {
-            try
-            {
-                string root = MelonEnvironment.GameRootDirectory ?? string.Empty;
-                string name = Path.GetFileName(root.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
-                if (!string.IsNullOrEmpty(name))
-                {
-                    string n = name.ToLowerInvariant();
-                    if (n.Contains("_2") || n.EndsWith("2") || n.Contains("client"))
-                        return "B";
-                }
-            }
-            catch
-            {
-            }
-
-            return "A";
+            return "OFF";
         }
     }
 }

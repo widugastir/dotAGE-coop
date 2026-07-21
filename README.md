@@ -114,6 +114,17 @@ If MelonLoader is not installed yet:
 
 
 
+## Host tools
+
+While hosting a lobby, the host has a few shortcuts meant for **new profiles** (so you are not stuck starting from zero progress):
+
+- **Memories:** in the memories menu during a game, **hold Shift** and pick a memory to unlock it. The unlock applies to **everyone in the lobby**.
+- **Research:** in the research menu, the host gets a button at the top to **reveal all research branches**. This only unlocks branch visibility (branches start hidden) — it does **not** grant the researches themselves.
+
+---
+
+
+
 ## License & credits
 
 - **Mod code:** free to use and fork.
